@@ -46,7 +46,8 @@ Checking the status of the bomgar check OSFA open status.
           assert.equal(checkOsfaStatus(new Date('April 6, 2018 15:30:30')), false, "Friday 4:31 is false");
           assert.equal(checkOsfaStatus(new Date('April 6, 2018 15:29:30')), true, "Friday 4:29 is true");
 
-           
+          assert.equal(checkOsfaStatus(new Date('April 6, 2018 15:29:30'),['4/5','4/11']), true, "Array with no effect");
+          assert.equal(checkOsfaStatus(new Date('April 6, 2018 15:29:30'), ['4/5', '4/6']), false, "Array with last item to make false");
       });
  
 </script>
