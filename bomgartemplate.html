@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="%LOCALE_CODE%">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -81,58 +81,56 @@ label#issues\:customer_company\:label {
  
  //var today=new Date()
  
- function checkOsfaStatus(today){
-	 var isChatEnabled=true;
-	 var monthday=(today.getMonth()+ 1) + '/' + today.getDate()
-	 todaysHour =today.getHours();
-	 todaysDay=today.getDay()
-	 minutenow=today.getMinutes();
-	 if (todaysDay ==0 || todaysDay ==6){ ///if todays is  saturday or sunday
-	 isChatEnabled=false;
-	 }
-	 else{
-	 
-		if (todaysHour==8 && todaysDay ==2){ //we are not open on tuesday at 8
-					isChatEnabled=false;
-				}
-				else{
-	 
-				if (todaysHour >= 15 || todaysHour < 8){ //if it is before or on 8 or after 4
-					if (todaysHour==15){ // if it is 4 PM
-						if (minutenow < 30){ //if it is less than 4:30 PM
-							isChatEnabled=true;
-						}
-						else{
-							isChatEnabled=false;
-						}
-						
-					}
-					else{ //9-3pm
-					  
-							isChatEnabled=true;
-						 
-					
-					}
-				}
-		}
-	}
-	return isChatEnabled;
- 
- }
- var today=new Date()
- isChatEnabled =checkOsfaStatus(today);
- 
+    function checkOsfaStatus(textDay) {
+        var today = new Date(textDay);
+        var isChatEnabled = true;
+        var monthday = (today.getMonth() + 1) + "/" + today.getDate();
+        var todaysHour = today.getHours();
+        var todaysDay = today.getDay();
+        var minutenow = today.getMinutes();
+        if (todaysDay == 0 || todaysDay == 6) { //if todays is  saturday or sunday
+            isChatEnabled = false;
+        } else {
+
+            if (todaysHour == 8 && todaysDay == 2) { //we are not open on tuesday at 8
+                isChatEnabled = false;
+            } else {
+
+                if (todaysHour >= 15 || todaysHour < 8) { //if it is before or on 8 or after 4
+                    if (todaysHour == 15) { // if it is 4 PM
+                        if (minutenow < 30) { //if it is less than 4:30 PM
+                            isChatEnabled = true;
+                        } else {
+                            isChatEnabled = false;
+                        }
+
+                    } else { //9-3pm
+
+                        isChatEnabled = true;
+
+
+                    }
+                }
+            }
+        }
+        return isChatEnabled;
+
+    }
+
+ var today = new Date();
+ var isChatEnabled =checkOsfaStatus(today);
+ // isChatEnabled=false //uncomment this line (remove the first two // ) to override and keep chat turned off
 $("#theday").text(today);
  if (isChatEnabled){
 	 $("#openstatus").text("open");
-	 
-	 $("form div label")[0].innerText="Start a chat with"
-	 $("select").val("8");
+
+     $("form div label")[0].innerText = "Start a chat with"; // over the current label for the which department dropdown
+	 $("select").val("8"); //automaticly select the first item (Fin Aid is #8)
  }
  else
  {
 	 $("#openstatus").text("closed");
-	 $("#issueSubmissionBox").html(" ")
+     $("#issueSubmissionBox").html(" ");
  }
  
 </script>
