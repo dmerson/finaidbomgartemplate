@@ -78,53 +78,61 @@ label#issues\:customer_company\:label {
 
 </div>
 <script>
- var isChatEnabled=true;
- var today=new Date()
- var monthday=(today.getMonth()+ 1) + '/' + today.getDate()
- todaysHour =today.getHours();
- todaysDay=today.getDay()
- minutenow=today.getMinutes();
- if (todaysDay ==0 || todaysDay ==6){ ///if todays is  saturday or sunday
- isChatEnabled=false;
- }
- else{
  
-	if (todaysHour==8 && todaysDay ==2){ //we are not open on tuesday at 8
-				isChatEnabled=false;
-			}
-			else{
+ //var today=new Date()
  
-			if (todaysHour >= 15 || todaysHour < 8){ //if it is before or on 8 or after 4
-				if (todaysHour==15){ // if it is 4 PM
-					if (minutenow < 30){ //if it is less than 4:30 PM
-						isChatEnabled=true;
+ function checkOsfaStatus(today){
+	 var isChatEnabled=true;
+	 var monthday=(today.getMonth()+ 1) + '/' + today.getDate()
+	 todaysHour =today.getHours();
+	 todaysDay=today.getDay()
+	 minutenow=today.getMinutes();
+	 if (todaysDay ==0 || todaysDay ==6){ ///if todays is  saturday or sunday
+	 isChatEnabled=false;
+	 }
+	 else{
+	 
+		if (todaysHour==8 && todaysDay ==2){ //we are not open on tuesday at 8
+					isChatEnabled=false;
+				}
+				else{
+	 
+				if (todaysHour >= 15 || todaysHour < 8){ //if it is before or on 8 or after 4
+					if (todaysHour==15){ // if it is 4 PM
+						if (minutenow < 30){ //if it is less than 4:30 PM
+							isChatEnabled=true;
+						}
+						else{
+							isChatEnabled=false;
+						}
+						
 					}
-					else{
-						isChatEnabled=false;
-					}
+					else{ //9-3pm
+					  
+							isChatEnabled=true;
+						 
 					
+					}
 				}
-				else{ //9-3pm
-				  
-						isChatEnabled=true;
-					 
-				
-				}
-			}
+		}
 	}
-}
+	return isChatEnabled;
+ 
+ }
+ var today=new Date()
+ isChatEnabled =checkOsfaStatus(today);
  
 $("#theday").text(today);
  if (isChatEnabled){
- $("#openstatus").text("open");
- 
- $("form div label")[0].innerText="Start a chat with"
- $("select").val("8");
+	 $("#openstatus").text("open");
+	 
+	 $("form div label")[0].innerText="Start a chat with"
+	 $("select").val("8");
  }
  else
  {
- $("#openstatus").text("closed");
- $("#issueSubmissionBox").html(" ")
+	 $("#openstatus").text("closed");
+	 $("#issueSubmissionBox").html(" ")
  }
  
 </script>
