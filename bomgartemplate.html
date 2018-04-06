@@ -152,7 +152,9 @@ $("#theday").text(today);
  if (isChatEnabled){
 	 $("#openstatus").text("open");
 
-     $("form div label")[0].innerText = "Start a chat with"; // over the current label for the which department dropdown
+     if ($("form div label")[0].innerText ==="Your Issue"){ //if it is the initial page
+         $("form div label")[0].innerText = "Start a chat with"; // over the current label for the which department dropdown
+     }
 	 $("select").val("8"); //automaticly select the first item (Fin Aid is #8)
  }
  else
