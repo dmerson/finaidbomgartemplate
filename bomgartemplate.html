@@ -113,31 +113,12 @@ label#issues\:customer_company\:label {
             return false;
         } else { // weekdays
             console.log('weekdays')
-            if (todaysHour == 8 && todaysDay == 2) { //we are not open on tuesday at 8
-                console.log('tuesday at 8AM');
+            if (todaysHour < 9 || todaysHour > 16) { //before 9 and after 4
                 return false;
-            } else { //other weekdays
-                console.log('other weekdays than tuesday at 8');
-                console.log(todaysHour)
-
-                if (todaysHour == 16) { // if it is 4 PM
-                    if (minutenow < 30) { //if it is less than 4:30 PM
-                        console.log("4 but not past 29 minutes")
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-
-                if (todaysHour > 16 || todaysHour < 8) {
-                    console.log("after 5 or before 8");
-                    return false;
-                }
-                else {
-                    console.log("not before 8 or after 5");
-                    return true;
-                }
+            } else {
+                return true;
             }
+        
         
         }
      
