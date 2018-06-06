@@ -1,55 +1,59 @@
-<html>
+﻿<html>
 
 <body>
 Checking the status of the bomgar check OSFA open status.
 
 <link rel="stylesheet" href="qunit-2.6.0.css">
-  <script src="qunit-2.6.0.js"></script>
-  <script src="checkOsfaStatus.js"></script>
+<script src="qunit-2.6.0.js"></script>
+<script src="checkOsfaStatus.js"></script>
 
 <script>
     
-      QUnit.test("osfa open basics", function( assert ) {
+    QUnit.test("osfa open basics", function( assert ) {
        
  
-       assert.equal(checkOsfaStatus('August 19, 2018 23:15:30'), false, "After hours is false" );
-       assert.equal(checkOsfaStatus('April 1, 2018 10:15:30'), false, "Sunday is false");
-       assert.equal(checkOsfaStatus('April 7, 2018 10:15:30'), false, "Saturday is false");
-       assert.equal(checkOsfaStatus(new Date('April 7, 2018 10:15:30')), false, "Saturday as a date is false");
+        assert.equal(checkOsfaStatus('August 19, 2018 23:15:30'), false, "After hours is false" );
+        assert.equal(checkOsfaStatus('April 1, 2018 10:15:30'), false, "Sunday is false");
+        assert.equal(checkOsfaStatus('April 7, 2018 10:15:30'), false, "Saturday is false");
+        assert.equal(checkOsfaStatus(new Date('April 7, 2018 10:15:30')), false, "Saturday as a date is false");
 
 
-       assert.equal(checkOsfaStatus(new Date('April 2, 2018 10:15:30')), true, "Monday as a date is true");
-       assert.equal(checkOsfaStatus(new Date('April 2, 2018 8:00:30')), true, "Monday 8 AM is true");
-        assert.equal(checkOsfaStatus(new Date('April 2, 2018 16:30:30')), false, "Monday 4:31 is false");
+        assert.equal(checkOsfaStatus(new Date('April 2, 2018 10:15:30')), true, "Monday as a date is true");
+        assert.equal(checkOsfaStatus(new Date('April 2, 2018 8:00:30')), false, "Monday 8 AM is false");
+        assert.equal(checkOsfaStatus(new Date('April 2, 2018 16:30:30')), true, "Monday 4:31 is true");
         assert.equal(checkOsfaStatus(new Date('April 2, 2018 16:29:30')), true, "Monday 4:29 is true");
+        assert.equal(checkOsfaStatus(new Date('April 2, 2018 17:00:30')), false, "Monday 5:00 is false");
 
-
-       assert.equal(checkOsfaStatus(new Date('April 3, 2018 8:00:30')), false, "Tuesday 8 AM is false");
-       assert.equal(checkOsfaStatus(new Date('April 3, 2018 9:00:30')), true, "Tuesday 9 AM is true");
-        assert.equal(checkOsfaStatus(new Date('April 3, 2018 16:30:30')), false, "Tuesday 4:30 is false");
+        assert.equal(checkOsfaStatus(new Date('April 3, 2018 8:00:30')), false, "Tuesday 8 AM is false");
+        assert.equal(checkOsfaStatus(new Date('April 3, 2018 9:00:30')), true, "Tuesday 9 AM is true");
+        assert.equal(checkOsfaStatus(new Date('April 3, 2018 16:30:30')), true, "Tuesday 4:30 is false");
         assert.equal(checkOsfaStatus(new Date('April 3, 2018 16:29:30')), true, "Tuesday 4:29 is true");
+        assert.equal(checkOsfaStatus(new Date('April 3, 2018 17:00:30')), false, "Tuesday 5:00 is false");
+
+        assert.equal(checkOsfaStatus(new Date('April 4, 2018 10:15:30')), true, "Wednesday as a date is true");
+        assert.equal(checkOsfaStatus(new Date('April 4, 2018 8:00:30')), false, "Wednesday 8 AM is false");
+        assert.equal(checkOsfaStatus(new Date('April 4, 2018 16:30:30')), true, "Wednesday 4:31 is true");
+        assert.equal(checkOsfaStatus(new Date('April 4, 2018 16:29:30')), true, "Wednesday 4:29 is true");
+        assert.equal(checkOsfaStatus(new Date('April 4, 2018 17:00:30')), false, "Wednesday 5:00 is false");
+
+        assert.equal(checkOsfaStatus(new Date('April 5, 2018 10:15:30')), true, "Thursday as a date is true");
+        assert.equal(checkOsfaStatus(new Date('April 5, 2018 8:00:30')), false, "Thursday 8 AM is false");
+        assert.equal(checkOsfaStatus(new Date('April 5, 2018 16:30:30')), true, "Thursday 4:31 is true");
+        assert.equal(checkOsfaStatus(new Date('April 5, 2018 16:29:30')), true, "Thursday 4:29 is true");
+        assert.equal(checkOsfaStatus(new Date('April 5, 2018 17:00:30')), false, "Thursday 5:00 is false");
 
 
-          assert.equal(checkOsfaStatus(new Date('April 4, 2018 10:15:30')), true, "Wednesday as a date is true");
-          assert.equal(checkOsfaStatus(new Date('April 4, 2018 8:00:30')), true, "Wednesday 8 AM is true");
-          assert.equal(checkOsfaStatus(new Date('April 4, 2018 16:30:30')), false, "Wednesday 4:31 is false");
-          assert.equal(checkOsfaStatus(new Date('April 4, 2018 16:29:30')), true, "Wednesday 4:29 is true");
+        assert.equal(checkOsfaStatus(new Date('April 6, 2018 10:15:30')), true, "Friday as a date is true");
+        assert.equal(checkOsfaStatus(new Date('April 6, 2018 8:00:30')), false, "Friday 8 AM is false");
+        assert.equal(checkOsfaStatus(new Date('April 6, 2018 16:30:30')), true, "Friday 4:31 is true");
+        assert.equal(checkOsfaStatus(new Date('April 6, 2018 16:29:30')), true, "Friday 4:29 is true");
+        assert.equal(checkOsfaStatus(new Date('April 6, 2018 17:00:30')), false, "Friday 5:00 is false");
 
 
-          assert.equal(checkOsfaStatus(new Date('April 5, 2018 10:15:30')), true, "Thursday as a date is true");
-          assert.equal(checkOsfaStatus(new Date('April 5, 2018 8:00:30')), true, "Thursday 8 AM is true");
-          assert.equal(checkOsfaStatus(new Date('April 5, 2018 16:30:30')), false, "Thursday 4:31 is false");
-          assert.equal(checkOsfaStatus(new Date('April 5, 2018 16:29:30')), true, "Thursday 4:29 is true");
-
-          assert.equal(checkOsfaStatus(new Date('April 6, 2018 10:15:30')), true, "Friday as a date is true");
-          assert.equal(checkOsfaStatus(new Date('April 6, 2018 8:00:30')), true, "Friday 8 AM is true");
-          assert.equal(checkOsfaStatus(new Date('April 6, 2018 16:30:30')), false, "Friday 4:31 is false");
-          assert.equal(checkOsfaStatus(new Date('April 6, 2018 16:29:30')), true, "Friday 4:29 is true");
-
-          assert.equal(checkOsfaStatus(new Date('April 6, 2018 16:29:30'),['4/5','4/11']), true, "Array with no effect");
-          assert.equal(checkOsfaStatus(new Date('April 6, 2018 16:29:30'), ['4/5', '4/6']), false, "Array with last item to make false");
+        assert.equal(checkOsfaStatus(new Date('April 6, 2018 16:29:30'),['4/5','4/11']), true, "Array with no effect");
+        assert.equal(checkOsfaStatus(new Date('April 6, 2018 16:29:30'), ['4/5', '4/6']), false, "Array with last item to make false");
  
-      });
+    });
  
 </script>
 <h1 id="qunit-header">OSFA Open Close Logic</h1>
@@ -62,6 +66,6 @@ Checking the status of the bomgar check OSFA open status.
 <div id="qunit-fixture">
     <div id="container"></div>
 </div>
- </body>
- </html>
+</body>
+</html>
  
