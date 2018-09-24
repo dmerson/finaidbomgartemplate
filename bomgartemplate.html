@@ -79,8 +79,19 @@
 
 </div>
 <script>
- 
- 
+    $($("form div span")[3]).hide()
+    $($("form div span")[3]).prev().hide()
+    $($("form div span")[1]).append("<br><br><label >Student Id</label><span><input id='studentid' class='mock' onkeyup='writeNewDescription()'></span><label>Category</label><span><select id='category' class='mock' onchange='writeNewDescription()'>><option></option><option>Aid Releasing to Bursar Account</option><option>Federal Work Study</option><option>Scholarships</option><option>Scholarship Universe</option><option>Student/Parent Loans</option><option>UAccess Aid To Do Item</option><option>Verify My FAFSA</option></select></span><br><label>Describe your issue</label><span><textarea id='tellus' rows=3 cols=37 onkeyup='writeNewDescription()'></textarea><br>")
+
+    function writeNewDescription() {
+        studentId = $("#studentid").val();
+        category = $("#category").val();
+        tellus = $("#tellus").val();
+        newSender = studentId + " " + category + " " + tellus;
+        newSender =newSender.replace("null","")
+        $($("textarea")[1]).val(newSender)
+
+    }
  
     function checkOsfaStatus(textDay, arrayOfClosedDates) {
         var today = new Date(textDay);
@@ -147,6 +158,12 @@
     }
  
 </script>
-
+<style>
+    .mock {
+        background-color: #B9D9EB;
+        border: 1px solid #5f6063;
+        border-radius: 3px;
+    }
+</style>
 </body>
 </html>
