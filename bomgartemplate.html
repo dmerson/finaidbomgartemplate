@@ -69,7 +69,7 @@
     <div>
    
 
-        <span> Our hours for chat are Monday through Friday at 9:00am-5:00pm. <br></span> <br>
+        <span> Please note, financial aid inquiries on topics that require in depth conversations may not be suited for assistance via chat and can be scheduled for a phone appointment at a later time. Our hours for chat are Monday through Friday at 9:00am-5:00pm and the office is closed on Holidays and University Closure dates. <br></span> <br>
 
         <span> Today is <span id='theday'></span> and we are: <span id='openstatus'></span></span>
     </div>
@@ -94,7 +94,14 @@
     }
  
     function checkOsfaStatus(textDay, arrayOfClosedDates) {
-        var today = new Date(textDay);
+        var rightNow = new Date();
+        var year = rightNow.getFullYear();
+        var month = rightNow.getUTCMonth();
+        var day = rightNow.getUTCDate();
+        var hour = rightNow.getUTCHours();
+        var minute = rightNow.getUTCMinutes();
+        var UTCDateTime = new Date(year, month, day, hour, minute, 1);
+        var today = UTCDateTime;
   
         var monthday = (today.getMonth() + 1) + "/" + today.getDate();
         var todaysHour = today.getHours();
@@ -125,7 +132,8 @@
             return false;
         } else { // weekdays
             console.log('weekdays')
-            if (todaysHour < 9 || todaysHour > 16) { //before 9 and after 4
+            if (todaysHour < 16 || todaysHour > 23) { //before 9 and after 4 on UTC time
+                //if (todaysHour < 9 || todaysHour > 16) { //before 9 and after 4
                 return false;
             } else {
                 return true;
@@ -138,7 +146,7 @@
     }
 
     var today = new Date();
-    var datesInQuestion = ['12/25', '12/26', '12/27', '12/28', '12/29', '12/30', '12/31', '1/1'];
+    var datesInQuestion = ['7/4', '11/12', '12/25', '12/26', '12/27', '12/28', '12/29', '12/30', '12/31', '1/1'];
     var isChatEnabled =checkOsfaStatus(today, datesInQuestion);
 //isChatEnabled=false //uncomment this line (remove the first two // ) to override and keep chat turned off
     $("#theday").text(today);
@@ -152,7 +160,7 @@
     }
     else
     {
-        $("#openstatus").text("Temporarily Unavailable");
+        $("#openstatus").text("Unavailable");
         $("#issueSubmissionBox").html(" ");
     }
  
@@ -164,5 +172,36 @@
         border-radius: 3px;
     }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
