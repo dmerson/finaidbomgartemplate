@@ -1,5 +1,12 @@
 function checkOsfaStatus(textDay, arrayOfClosedDates) {
-    var today = new Date(textDay);
+    var rightNow = new Date();
+    var year = rightNow.getFullYear();
+    var month = rightNow.getUTCMonth();
+    var day = rightNow.getUTCDate();
+    var hour = rightNow.getUTCHours();
+    var minute = rightNow.getUTCMinutes();
+    var UTCDateTime = new Date(year, month, day, hour, minute, 1);
+    var today = UTCDateTime;
   
     var monthday = (today.getMonth() + 1) + "/" + today.getDate();
     var todaysHour = today.getHours();
@@ -29,8 +36,9 @@ function checkOsfaStatus(textDay, arrayOfClosedDates) {
         console.log('sat or sun');
         return false;
     } else { // weekdays
-        console.log('weekdays')
-        if (todaysHour < 9 || todaysHour > 16) { //before 9 and after 4
+        console.log('weekdays');
+        if (todaysHour < 16 || todaysHour > 23) { //before 9 and after 4 on UTC time
+        //if (todaysHour < 9 || todaysHour > 16) { //before 9 and after 4
             return false;
         } else {
             return true;
