@@ -94,7 +94,7 @@
     }
  
     function checkOsfaStatus(textDay, arrayOfClosedDates) {
-        var rightNow = new Date();
+        var rightNow = new Date(textDay);
         var year = rightNow.getFullYear();
         var month = rightNow.getUTCMonth();
         var day = rightNow.getUTCDate();
